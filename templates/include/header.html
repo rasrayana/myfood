@@ -1,0 +1,105 @@
+{% load static %}
+<header class="header-area header-1" data-aos="fade-down">
+    <!-- Start mobile menu -->
+    <div class="mobile-menu">
+        <div class="container">
+            <div class="mobile-menu-wrapper"></div>
+        </div>
+    </div>
+    <!-- End mobile menu -->
+
+    <div class="main-responsive-nav">
+        <div class="container">
+            <!-- Mobile Logo -->
+            <div class="logo">
+                <a href="index.html" target="_self" title="Treats">
+                    <img class="lazyload" src="{% static 'assets/images/placeholder.png' %}" data-src="{{settings.logo.url}}" alt="Treats logo">
+                </a>
+            </div>
+            <!-- Menu toggle button -->
+            <button class="menu-toggler" type="button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="main-navbar">
+        <div class="header-top py-2">
+            <div class="container">
+                <div class="header-top-items mobile-item d-flex flex-wrap justify-content-between gap-15 align-items-center">
+                    <a href="tel:99911446666" class="icon-start" target="_self" title="Call Us">
+                        <span class="color-primary">
+                            Позвонить:
+                        </span>
+                        {{settings.phone}}
+                    </a>
+                    <div class="social-link icon-only">
+                        <a class="rounded-pill" href="{{settings.instagram}}" target="_blank" title="instagram"><i class="fab fa-instagram"></i></a>
+                        <a class="rounded-pill" href="{{settings.dribbble}}" target="_blank" title="dribbble"><i class="fab fa-dribbble"></i></a>
+                        <a class="rounded-pill" href="{{settings.twitter}}" target="_blank" title="twitter"><i class="fab fa-twitter"></i></a>
+                        <a class="rounded-pill" href="{{settings.youtube}}" target="_blank" title="youtube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg">
+                    <!-- Logo -->
+                    <a class="navbar-brand" href="{% url 'index' %}" target="_self" title="Treats">
+                        <img class="lazyload" src="{% static 'assets/images/placeholder.png' %}" data-src="{{settings.logo.url}}" alt="Treats logo">
+                    </a>
+                    <!-- Navigation items -->
+                    <div class="collapse navbar-collapse">
+                        <ul id="mainMenu" class="navbar-nav mobile-item mx-auto">
+                            <li class="nav-item">
+                                <a href="{% url 'index' %}" class="nav-link toggle">Главная <i class="fal fa-plus"></i></a>
+                                
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'about' %}">О нас</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link toggle" href="{% url 'menu' %}">Меню</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link toggle" href="{% url 'shop' %}">Магазин<i class="fal fa-plus"></i></a>
+                                <ul class="menu-dropdown">
+                                    
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'cart' %}">Корзина</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'contacts' %}">Контакты</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="more-option mobile-item">
+                        
+                        <div class="item">
+                            <a href="login.html" class="btn-icon" target="_self" aria-label="User" title="User">
+                                <i class="fal fa-user-circle"></i>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="{% url 'cart' %}" class="btn-icon pe-2" target="_self" aria-label="Cart" title="Cart">
+                                <i class="fal fa-shopping-bag"></i>
+                                <span class="badge rounded-pill bg-primary"></span>     
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="{% url 'reservation' %}" class="btn btn-md btn-primary rounded-pill" title="Book a Table" target="_self">
+                                Бронировать</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

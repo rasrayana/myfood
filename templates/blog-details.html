@@ -1,0 +1,248 @@
+{% extends 'include/homepage.html' %}
+{% load static %}
+{% block content %}
+    <!-- Preloader start -->
+    <div id="preLoader">
+        <div class="loader">
+            <img src="{% static 'assets/images/loader-1.gif' %}" alt="Preloader">
+        </div>
+    </div>
+    <!-- Preloader end -->
+
+    <!-- Header-area start -->
+    {% include 'include/header.html' %}
+    <!-- Header-area end -->
+
+    <!-- Breadcrumb start -->
+    <div class="breadcrumb-area bg-img bg-cover" data-bg-image="{{slideabout.image.url}}">
+        <div class="overlay 65"></div>
+        <div class="container">
+            <div class="content text-center">
+                <h2 class="color-white">Детальный блок</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Детальный блок</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb end -->
+
+    <!-- Blog-details-area start -->
+    <div class="blog-details-area pt-100 pb-40">
+        <div class="container">
+            <div class="row justify-content-center gx-xl-5">
+                <div class="col-lg-8">
+                    <article class="blog">
+                        <div class="blog-img mb-30">
+                            <div class="lazy-container ratio ratio-5-3 radius-md">
+                                <img class="lazyload" src="{% static 'assets/images/placeholder.png' %}" data-src="{{news_blog.image.url}}" alt="Blog Image">
+                            </div>
+                        </div>
+                        <ul class="blog-list list-unstyled mb-1">
+                           
+                            <li class="icon-start">
+                                <i class="fal fa-calendar-check"></i>{{news_blog.created_at}}
+                            </li>
+                           
+                        </ul>
+                        <h3 class="blog-title lc-2 mb-20">
+                            {{news_blog.title}}
+                        </h3>
+                    </article>
+
+                    <!-- Description area -->
+                    <div class="blog-description pb-20">
+                        <div class="content">
+                            <p>{{news_blog.descriprions|safe}}
+                            </p>
+                            <blockquote class="blockquote mb-30 p-25 bg-light">
+                                <i class="fas fa-quote-left"></i>
+                                <p>
+                                    {{news_blog.letter}}
+                                </p>
+                            </blockquote>
+                            <h4 class="title">
+                                {{news_blog.mini_news}}
+                            </h4>
+                            <p>
+                               {{news_blog.mini_descriprions|safe}}
+                            </p>
+                            <div class="images pb-10">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="lazy-container ratio ratio-2-3 mb-20 radius-md">
+                                            <img class="lazyload" src="{% static 'assets/images/placeholder.png' %}" data-src="{{news_blog.image1.url}}" alt="Blog Image">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="lazy-container ratio ratio-2-3 mb-20 radius-md">
+                                            <img class="lazyload" src="{% static 'assets/images/placeholder.png' %}" data-src="{{news_blog.image2.url}}" alt="Blog Image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comments area -->
+                    <div class="comments">
+                        <h3 class="mb-20"> Комментарий</h3>
+                        <div class="comment-box mb-50 radius-md">
+                            {% for comments in news_blog.comments.all %}
+                            <ol class="comment-list">
+                                
+                                <li class="comment">
+                                    <div class="comment-body">
+                                        <div class="comment-author">
+                                            <div class="lazy-container ratio ratio-1-1 rounded-circle">
+                                                <img class="lazyload" src="{% static 'assets/images/placeholder.png' %}" data-src="{{settings.image.url}}" alt="image">
+                                            </div>
+                                        </div>
+                                        <div class="comment-content">
+                                            <h6 class="name">{{ comments.name }}</h6>
+                                            <p>
+                                                {{ comments.comment }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="comment">
+                                    <ol class="children">
+                                        <li class="comment">
+                                            
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                            {% endfor %}
+                        </div>
+                        <div class="comment-reply mb-50">
+                            <h3 class="mb-10">Опубликовать комментарий</h3>
+                            <p class="comment-notes">
+                                <span id="email-notes">Ваш электронный адрес не будет опубликован.</span>
+                                Необходимые поля отмечены 
+                                <span class="required text-danger">*</span>
+                            </p>
+                            <form method="POST" action="{% url 'blog_details' id=news_blog.id %}" class="comment-form">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-20">
+                                            <input type="text" class="form-control" name="name" placeholder="Имя*" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-20">
+                                            <input type="email" class="form-control" name="email" placeholder="Почта*" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group mb-30">
+                                            <textarea name="comment" class="form-control" placeholder="Комментарий" required rows="6"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-lg btn-primary rounded-pill" aria-label="Post Comment">Опубликовать</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>  
+                <div class="col-lg-4">
+                    <aside class="widget-area pb-10">
+                        <!-- Widget search -->
+                        <div class="widget widget-search mb-40">
+                            <div class="p-25 radius-md border">
+                                <h4 class="title mb-10">Поиск сообщений</h4>
+                                <div class="search-form">
+                                    <form id="searchForm">
+                                        <div class="input-inline rounded-pill border">
+                                            <input class="form-control border-0 rounded-pill" placeholder="Поиск...." type="text" name="SEARCH" required="">
+                                            <button class="btn-icon rounded-circle" type="submit" aria-label="Search button">
+                                                <i class="far fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Widget posts -->
+                        <div class="widget widget-posts mb-40">
+                            <div class="p-25 radius-md border">
+                                <h4 class="title">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#blogPost">
+                                        
+                                        Топ последних сообщений
+                                    </button>
+                                </h4>
+                                <div id="blogPost" class="collapse show">
+                                    <div class="accordion-body mt-20 scroll-y">
+                                        <article class="blog blog-inline">
+                                            <div class="blog-img">
+                                                <a href="{% url 'blog_details' news_blog.id %}" target="_self" title="Link" class="lazy-container ratio ratio-1-1 radius-sm">
+                                                    <img class="lazyload" src="{% static 'assets/images/placeholder.png' %}" data-src="{{news_blog.image.url}}" alt="Blog Image">
+                                                </a>
+                                            </div>
+                                            <div class="blog-content">
+                                                <h6 class="blog-title lc-2 mb-10">
+                                                    <a href="blog-details.html" target="_self" title="Link">
+                                                        {{news_blog.title}}
+                                                    </a>
+                                                </h6>
+                                                <ul class="blog-list no-border list-unstyled">
+                                                    <li class="icon-start font-sm">
+                                                        <a href="blogs.html" target="_self" title="link">
+                                                            <i class="fal fa-calendar-alt"></i>{{news_blog.created_at}}
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </article>
+                                        
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Widget tags -->
+                       
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Blog-details-area end -->
+    
+    <!-- Gallery-area start -->
+    <div class="gallery-area" data-aos="fade-up">
+        <div class="container">
+            <div class="swiper gallery-slider">
+                <div class="swiper-wrapper">
+                    {% for allfood in allfood %}
+                    <div class="swiper-slide">
+                        <a href="https://www.instagram.com/" class="slider-item" title="Image" target="_blank">
+                            <div class="lazy-container ratio ratio-2-3">
+                                <img class="lazyload" src="{% static 'assets/images/placeholder.png' %}" data-src="{{allfood.image.url}}" alt="Image">
+                            </div>
+                            <div class="icon rounded-pill"><img class="lazyload blur-up" src="{% static 'assets/    images/placeholder.png' %}" data-src="{{lastpost.instagram.url}}" alt="Image"></div>
+                        </a>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Gallery-area end -->
+
+    <!-- Footer-area start -->
+    {% include "include/footer.html" %}
+    <!-- Footer-area end-->
+
+    <!-- Go to Top -->
+    <div class="go-top"><i class="fal fa-angle-up"></i></div>
+    <!-- Go to Top -->
+
+{% endblock %}

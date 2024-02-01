@@ -1,0 +1,233 @@
+{% extends 'include/homepage.html' %}
+{% load static %}
+{% block content %}
+    <!-- Preloader start -->
+    <div id="preLoader">
+        <div class="loader">
+            <img src="{% static 'assets/images/loader-1.gif' %}" alt="Preloader">
+        </div>
+    </div>
+    <!-- Preloader end -->
+
+    <!-- Header-area start -->
+    {% include 'include/header.html' %}
+    <!-- Header-area end -->
+
+    <!-- Breadcrumb start -->
+    <div class="breadcrumb-area bg-img bg-cover" data-bg-image="{{slideabout.image.url}}">
+        <div class="overlay 65"></div>
+        <div class="container">
+            <div class="content text-center">
+                <h2 class="color-white">Детальный</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Детальный</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb end -->
+
+    <!-- Shop-details-area start -->
+    <div class="shop-details-area pt-100 pb-60">
+        <div class="container">
+            <div class="row gx-xl-5 align-items-center">
+                <div class="col-lg-6">
+                    <div class="shop-details-gallery mb-40" data-aos="fade-up">
+                        <div class="swiper shop-details-slider radius-md">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <figure class="lazy-container ratio ratio-1-1">
+                                        <a href="{% static 'assets/images/shop/shop-1.jpg' %}" class="lightbox-single">
+                                            <img class="lazyload" src="{% static 'assets/images/placeholder.png' %}" data-src="{{food_detail.image.url }}" alt="product image">
+                                        </a>
+                                    </figure>
+                                </div>
+                            </div>
+                            <!-- Slider navigation buttons -->
+                            <div class="slider-navigation">
+                                <button type="button" title="Slide prev" class="slider-btn slider-btn-prev radius-0">
+                                    <i class="fal fa-angle-left"></i>
+                                </button>
+                                <button type="button" title="Slide next" class="slider-btn slider-btn-next radius-0">
+                                    <i class="fal fa-angle-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="shop-thumb">
+                            <div class="swiper shop-thumbnails">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <div class="thumbnail-img lazy-container ratio ratio-1-1 radius-md">
+                                            <img class="lazyload" src="{% static 'assets/images/placeholder.png' %}" data-src="{{food_detail.image.url }}" alt="product image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product-single-details mb-40" data-aos="fade-up">
+                        <div class="ratings mb-15">
+                            <div class="rate">
+                                <div class="rating-icon"></div>
+                            </div>
+                            <span class="ratings-total">(4,7 от 1 тыс. клиентов)</span>
+                        </div>
+                        <h3 class="product-title mb-15">{{food_detail.title}}</h3>
+                        <div class="product-price"> 
+                            <span class="h6 font-lg new-price color-primary">{{food_detail.price_now}}</span>
+                            <span class="prev-price font-sm">{{food_detail.price_before}}</span>
+                        </div>
+                        <div class="product-desc">
+                            <p>
+                               {{food_detail.descriptions}}
+                            </p>
+                        </div>
+                        <div class="btn-groups mt-30">
+                            <div class="quantity-input">
+                                <div class="qty-btn quantity-down">
+                                    <i class="fal fa-minus"></i>
+                                </div>
+                                <input type="text" value="1" name="quantity" spellcheck="false" data-ms-editor="true">
+                                <div class="qty-btn quantity-up">
+                                    <i class="fal fa-plus"></i>
+                                </div> 
+                            </div>
+                            <a href="{% url 'cart' %}" class="btn btn-md btn-primary" title="Add to Cart" target="_self">В корзину</a>
+                            <a href="checkout.html" class="btn btn-md btn-outline" title="Order Now" target="_self">
+                                Заказать сейчас</a>
+                        </div>
+                        <div class="social-link style-2 mt-30">
+                            <a href="{{settings.instagram}}" target="_blank" title="instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="{{settings.dribbble}}" target="_blank" title="dribbble"><i class="fab fa-dribbble"></i></a>
+                            <a href="{{settings.twitter}}" target="_blank" title="twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="{{settings.youtube}}" target="_blank" title="youtube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="description mb-40" data-aos="fade-up">
+                <div class="tabs-navigation text-center border-bottom pb-20 mb-30">
+                    <ul class="nav nav-tabs" data-hover="fancyHover">
+                        <li class="nav-item active">
+                            <button class="nav-link hover-effect active btn-lg radius-sm" data-bs-toggle="tab" data-bs-target="#tab1" type="button">Описание</button>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="tab1">
+                        <!-- Product description -->
+                        <div class="product-desc">
+                            <p>
+                               {{food_detail.descriptions}}
+                            </p>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Shop-details-area end -->
+
+    <!-- Related Product-area start -->
+    <div class="shop-area pb-75" data-aos="fade-up">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title title-inline mb-30">
+                        <h3 class="title mb-20">Похожий продукт
+                        </h3>
+                        <!-- Slider navigation buttons -->
+                        <div class="slider-navigation mb-20">
+                            <button type="button" title="Slide prev" class="slider-btn slider-btn-prev rounded-circle" id="shop-slider-prev">
+                                <i class="fal fa-angle-left"></i>
+                            </button>
+                            <button type="button" title="Slide next" class="slider-btn slider-btn-next rounded-circle" id="shop-slider-next">
+                                <i class="fal fa-angle-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="swiper shop-slider">
+                        <div class="swiper-wrapper">
+                            {% for food in food %}
+                            <div class="swiper-slide item">
+                                <div class="product radius-md text-center p-30 mb-25">
+                                    <figure class="product-img mb-20 mx-auto">
+                                        <a href="shop-details.html" target="_self" title="Link" class="lazy-container ratio ratio-1-1 bg-none">
+                                            <img class="lazyload" src="{% static 'assets/images/placeholder.png' %}" data-src="{{food.image.url}}" alt="Image">
+                                        </a>
+                                        <div class="hover-show">
+                                            <div class="btn-groups">
+                                                <a href="shop-details.html" class="btn-icon" title="Просмотр" target="_self">
+                                                    <i class="fal fa-eye"></i>
+                                                </a>
+                                                <a href="{% url 'cart' %}" class="btn-icon" title="В корзину" target="_self">
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                </a>
+                                                <a href="wishlist.html" class="btn-icon" title="В избранные" target="_self">
+                                                    <i class="fal fa-heart"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                    <div class="product-details">
+                                        <h4 class="product-title lc-1 mb-10"><a href="shop-details.html" target="_self" title="Vanilla Cold Coffee">{{food.title}}</a></h4>
+                                        <div class="product-price">
+                                            <span class="h6 font-lg new-price color-primary">{{food.price_now}}</span>
+                                            <span class="prev-price font-sm">{{food.price_before}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Related Product-area end -->
+
+    <!-- Gallery-area start -->
+    <div class="gallery-area" data-aos="fade-up">
+        <div class="container">
+            <div class="swiper gallery-slider">
+                <div class="swiper-wrapper">
+                    {% for allfood in allfood %}
+                    <div class="swiper-slide">
+                        <a href="https://www.instagram.com/" class="slider-item" title="Image" target="_blank">
+                            <div class="lazy-container ratio ratio-2-3">
+                                <img class="lazyload" src="{% static 'assets/images/placeholder.png' %}" data-src="{{allfood.image.url}}" alt="Image">
+                            </div>
+                            <div class="icon rounded-pill"><img class="lazyload blur-up" src="{% static 'assets/    images/placeholder.png' %}" data-src="{{lastpost.instagram.url}}" alt="Image"></div>
+                        </a>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Gallery-area end -->
+
+    <!-- Footer-area start -->
+    {% include 'include/footer.html' %}
+    <!-- Footer-area end-->
+
+    <!-- Go to Top -->
+    <div class="go-top"><i class="fal fa-angle-up"></i></div>
+    <!-- Go to Top -->
+
+    <!-- Jquery JS -->
+{% endblock %}

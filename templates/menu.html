@@ -1,0 +1,190 @@
+{% extends 'include/homepage.html' %}
+{% load static %}
+{% block content %}
+    <!-- Preloader start -->
+    <div id="preLoader">
+        <div class="loader">
+            <img src="{% static 'assets/images/loader-1.gif' %}" alt="Preloader">
+        </div>
+    </div>
+    <!-- Preloader end -->
+
+    <!-- Header-area start -->
+    {% include 'include/header.html' %}
+    <!-- Header-area end -->
+
+    <!-- Breadcrumb start -->
+    <div class="breadcrumb-area bg-img bg-cover" data-bg-image="{{slideabout.image.url}}">
+        <div class="overlay 65"></div>
+        <div class="container">
+            <div class="content text-center">
+                <h2 class="color-white">Наше меню</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Меню</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb end -->
+
+    <!-- Menu-area start -->
+    <section class="menu-area pt-100 pb-75">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="tabs-navigation tabs-navigation-3 text-center mb-30">
+                        <ul class="nav nav-tabs flex-wrap">
+                            {% for big_category in big_categories %}
+                            <li class="nav-item">
+                                <button class="nav-link btn-lg" data-bs-toggle="tab" data-bs-target="#tab{{big_category.id}}" type="button">
+                                    <span class="menu-icon mb-15">
+                                        <i class="fal fa-hamburger"></i>
+                                    </span>
+                                    <span class="h5 mb-0 lh-1">{{ big_category.title }}</span>
+                                </button>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="tab-content">
+                        {% for big_category in big_categories %}
+                        <div class="tab-pane slide show active" id="tab{{big_category.id}}">
+                            <div class="tabs-navigation tabs-navigation-2 text-center mb-30">
+                                <ul class="nav nav-tabs border-bottom" data-hover="fancyHover">
+                                    <li class="nav-item active">
+                                        <button class="nav-link hover-effect active btn-lg" data-bs-toggle="tab" data-bs-target="#tab{{ big_category.id }}-all" type="button">Все</button>
+                                    </li>
+                                    {% for category in categories %}
+                                        {% if category.big_category == big_category %}
+                                            <li class="nav-item">
+                                                <button class="nav-link hover-effect btn-lg" data-bs-toggle="tab" data-bs-target="#tab{{ category.id }}" type="button">{{category.name}}</button>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            
+                            <div class="tab-content">
+                                <div class="tab-pane slide show active" id="tab{{ big_category.id }}-all">
+                                    <div class="row">
+                                        {% for menu in menu %}
+                                            {% if menu.category.big_category == big_category %}
+                                                <div class="col-lg-6 col-md-12 col-sm-6">
+                                                    <div class="menu p-15 mb-25">
+                                                        <figure class="menu-img">
+                                                            <div class="lazy-container ratio ratio-1-1 bg-none">
+                                                                <img class="lazyload" src="{% static 'assets/images/placeholder.png' %}" data-src="{{menu.image.url}}" alt="Image">
+                                                            </div>
+                                                            <div class="hover-show">
+                                                                <a href="{% url 'cart'  %}" class="btn-icon radius-sm" title="В корзину" target="_self">
+                                                                    <i class="fal fa-shopping-bag"></i>
+                                                                </a>
+                                                            </div>
+                                                        </figure>
+                                                        <div class="menu-details">
+                                                            <div class="menu-title-price mb-2">
+                                                                <h4 class="menu-title lc-1 mb-0">
+                                                                    {{menu.title}}
+                                                                </h4>
+                                                                <!-- <span class="hr"></span> -->
+                                                                <div class="menu-price">
+                                                                    <span class="h5 new-price color-primary">{{ menu.price_now }}</span>
+                                                                    <span class="prev-price">{{ menu.price_before }}</span>
+                                                                </div>
+                                                            </div>
+                                                            <p class="text mb-0">
+                                                                {{menu.descriptions}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% for category in categories %}
+                                    {% if category.big_category == big_category %}
+                                        <div class="tab-pane slide" id="tab{{ category.id }}">
+                                            <div class="row">
+                                                {% for menu in menu %}
+                                                    {% if menu.category == category %}
+                                                    <div class="col-lg-6 col-md-12 col-sm-6">
+                                                        <div class="menu p-15 mb-25">
+                                                            <figure class="menu-img">
+                                                                <div class="lazy-container ratio ratio-1-1 bg-none">
+                                                                    <img class="lazyload" src="{% static 'assets/images/placeholder.png' %}" data-src="{{menu.image.url}}" alt="Image">
+                                                                </div>
+                                                                <div class="hover-show">
+                                                                    <a href="{% url 'cart' %}" class="btn-icon radius-sm" title="В корзину" target="_self">
+                                                                        <i class="fal fa-shopping-bag"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </figure>
+                                                            <div class="menu-details">
+                                                                <div class="menu-title-price mb-2">
+                                                                    <h4 class="menu-title lc-1 mb-0">
+                                                                        {{menu.title}}
+                                                                    </h4>
+                                                                    <!-- <span class="hr"></span> -->
+                                                                    <div class="menu-price">
+                                                                        <span class="h5 new-price color-primary">{{ menu.price_now }}</span>
+                                                                        <span class="prev-price">{{ menu.price_before }}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <p class="text mb-0">
+                                                                    {{menu.descriptions}}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Menu-area end -->
+
+    <!-- Gallery-area start -->
+    <div class="gallery-area" data-aos="fade-up">
+        <div class="container">
+            <div class="swiper gallery-slider">
+                <div class="swiper-wrapper">
+                    {% for allfood in allfood %}
+                    <div class="swiper-slide">
+                        <a href="https://www.instagram.com/" class="slider-item" title="Image" target="_blank">
+                            <div class="lazy-container ratio ratio-2-3">
+                                <img class="lazyload" src="{% static 'assets/images/placeholder.png' %}" data-src="{{allfood.image.url}}" alt="Image">
+                            </div>
+                            <div class="icon rounded-pill"><img class="lazyload blur-up" src="{% static 'assets/images/placeholder.png' %}" data-src="{{lastpost.instagram.url}}" alt="Image"></div>
+                        </a>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Gallery-area end -->
+
+    <!-- Footer-area start -->
+    {% include "include/footer.html" %}
+    <!-- Footer-area end-->
+
+    <!-- Go to Top -->
+    <div class="go-top"><i class="fal fa-angle-up"></i></div>
+    <!-- Go to Top -->
+{% endblock %}
